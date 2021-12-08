@@ -6,14 +6,15 @@ Miembros del equipo:
 
 Alejandro Cauich Ku Github: "https://github.com/Alrox97"
 
-<img src="https://github.com/Alrox97/ProyectoDAW/blob/main/Integrantes/Alejandro.jpeg" alt="alt text" width="200" height="250">
+<img src="https://github.com/Alrox97/ProyectoDAW/blob/master/Integrantes/Alejandro.jpeg" alt="alt text" width="200" height="250">
 
 Israel Cruz Morales Github: "https://github.com/VanillaICe-jpg"
 
-<img src="https://github.com/Alrox97/ProyectoDAW/blob/main/Integrantes/Israel.jpg" alt="alt text" width="200" height="300">
+<img src="https://github.com/Alrox97/ProyectoDAW/blob/master/Integrantes/Israel.jpg" alt="alt text" width="200" height="300">
  
 ## Spanish
 Dependencias
+
 El servidor ha sido empleando Python 3.10.0, el cual necesita de las dependencias declaradas en el archivo de requerimientos. Para instalar todo lo necesario, primero abra la consola de su computador y coloquela en el directorio en el que se encuentra el archivo requirements.txt, paso seguido ejecute:
 
 pip install -r requirements.txt
