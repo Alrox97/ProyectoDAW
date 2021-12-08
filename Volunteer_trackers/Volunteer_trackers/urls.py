@@ -19,6 +19,7 @@ urlpatterns = [
         template_name='authen/password_Rdone.html'), name='password_reset_done'),
     re_path(r'^reset/(?P<uidb64>[0-9A-za-z_\-]+)/(?P<token>.+)/$', PasswordResetConfirmView.as_view(
         template_name='authen/password_Rconfirms.html'), name='password_reset_confirm'),
+
     path('reset/done', PasswordResetCompleteView.as_view(
         template_name='authen/password_Rcomplete.html'), name='password_reset_complete'),
     path('myprofileVolun/', views.IndexView.as_view(), name='index'),
@@ -38,4 +39,12 @@ urlpatterns = [
          views.delete, name='delete'),
     path('myprofileInst/deletelist/',
     views.deletelist, name='deletelist'),
+
+    path('volunteerProfile/', auth_views.LoginView.as_view(template_name='volunteers/volunteerProfile.html'), name='volunteerProfile'),
+    path('myprofileVolun/', auth_views.LoginView.as_view(template_name='volunteers/myprofileVolun.html'), name='myprofileVolun'),
+    path('searchEvents/', auth_views.LoginView.as_view(template_name='volunteers/searchEvents.html'), name='searchEvents'),
+
+
+    path('institutionProfile/', auth_views.LoginView.as_view(template_name='institutions/institutionProfile.html'), name='institutionProfile'),
+    path('myprofileInst/', auth_views.LoginView.as_view(template_name='institutions/myprofileInst.html'), name='myprofileInst'),
 ]

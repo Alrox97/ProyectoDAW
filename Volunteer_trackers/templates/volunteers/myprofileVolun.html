@@ -13,65 +13,18 @@
     <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/mainHome">
+        <a class="navbar-item" href="/myprofileVolun">
           <h1 class="pl-1"><strong>Volunteer Trackers</strong></h1>
         </a>
 
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarMenu"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+        <a class="navbar-item" href="/volunteerProfile">
+          <h1 class="pl-1"><strong>{{ user.username}}</strong></h1>
         </a>
-      </div>
+        <a class="navbar-item" href="/volunteerProfile">
+          <h1 class="pl-1"><strong>{{ user.username}}</strong></h1>
+        </a>
+        
 
-      <div id="navbarMenu" class="navbar-menu">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <button
-              class="button is-success open-modal"
-              data-modal-id="#add-option"
-            >
-              <span class="icon-text">
-                <span class="icon">
-                  <i class="fas fa-plus-circle"></i>
-                </span>
-                <span>Add a new event</span>
-              </span>
-            </button>
-          </div>
-          <div class="navbar-item">
-            <button
-              class="button is-danger open-modal"
-              data-modal-id="#remove-option"
-            >
-              <span class="icon-text">
-                <span class="icon">
-                  <i class="fas fa-minus-circle"></i>
-                </span>
-                <span>Remove selected event</span>
-              </span>
-            </button>
-          </div>
-          <div class="navbar-item">
-            <a href="/logout">
-              <button type="submit" class="button is-dark">
-                <span class="icon-text">
-                  <span class="icon">
-                    <i class="fas fa-sign-out-alt"></i>
-                  </span>
-                  <span>Log out</span>
-                </span>
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
     </nav>
 
     <!-- Navbar menus -->
@@ -408,7 +361,6 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{% static 'js/navbar.js' %}"></script>
     <script src="{% static 'js/modal.js' %}"></script>
     <script src="{% static 'js/checkmaster.js' %}"></script>
   </body>

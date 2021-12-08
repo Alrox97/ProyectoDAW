@@ -7,7 +7,17 @@ from .forms import SignUpForm, EventsForm
 from .models import Events
 from django.views.generic import ListView, DetailView
 from datetime import datetime
-    
+
+def searchEvents(request):
+    if request.method=="POST":
+        searched = request.POST('searched')
+        events = Events.objects.filter(name__contains=searched)
+
+        return render(request, 'volunteers/searchEvents.html',
+        {'searched':searched,
+         'events':events})
+    else:
+        return render(request, 'volunteers/searchEvents.html',{})
 
 def home(request):
     """
