@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Israel Cruz Morales, Alejandro Cauich Ku" />
     <title>Volunteer Trackers Institution Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
 
   <body class="has-background-white-ter">
@@ -19,7 +20,18 @@
           </h1>
         </a>
 
+        <form 
+        method=POST
+        action="{% url 'searchEvents' %}">
 
+          {% csrf_token %}
+
+          <input type="search" placeholder="Search" name="searched" > 
+          
+          
+          <button class="btn" type="submit">Search</button>
+        </form>
+ 
         <a class="navbar-item" href="/institutionProfile">
           <h1 class="pl-1"><strong>{{ user.username}}</strong></h1>
         </a>
@@ -29,6 +41,32 @@
 
       </div>
 
+      
+      <div class="navbar-item">
+        <a href="/logout">
+          <button type="submit" class="button is-dark">
+            <span class="icon-text">
+              <span class="icon">
+                <i class="fas fa-sign-out-alt"></i>
+              </span>
+              <span>Log out</span>
+            </span>
+          </button>
+        </a>
+
+        <div class="navbar-item">
+          <a href="/volunteerProfile">
+            <button type="submit" class="button is-dark">
+              <span class="icon-text">
+                <span class="icon">
+                  <i class="fas fa-sign-out-alt"></i>
+                </span>
+                <span>Change account type</span>
+              </span>
+            </button>
+          </a>
+        </div>
+      </div>
 
       
       </nav>
