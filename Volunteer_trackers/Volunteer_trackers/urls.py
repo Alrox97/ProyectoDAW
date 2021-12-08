@@ -11,5 +11,15 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='authen/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('signup/', views.signup, name='signup'),
-     path('myprofileVolun/', auth_views.LoginView.as_view(template_name='institutions/myprofileVolun.html'), name='myprofileVolun'),
+    path('successRecovery/', auth_views.LoginView.as_view(
+        template_name='authen/successR.html'), name='successRecovery'),
+    path('reset/password_reset', PasswordResetView.as_view(template_name='authen/password_Rforms.html',
+         email_template_name="authen/password_reset.html"), name='password_reset'),
+    path('reset/password_reset_done', PasswordResetDoneView.as_view(
+        template_name='authen/password_Rdone.html'), name='password_reset_done'),
+    re_path(r'^reset/(?P<uidb64>[0-9A-za-z_\-]+)/(?P<token>.+)/$', PasswordResetConfirmView.as_view(
+        template_name='authen/password_Rconfirms.html'), name='password_reset_confirm'),
+    path('reset/done', PasswordResetCompleteView.as_view(
+        template_name='authen/password_Rcomplete.html'), name='password_reset_complete'),
+     path('myprofileVolun/', auth_views.LoginView.as_view(template_name='volunteers/myprofileVolun.html'), name='myprofileVolun'),
 ]
