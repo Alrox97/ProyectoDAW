@@ -47,6 +47,10 @@
               <input class="input" type="email" name="email" id="email" placeholder="Insert your email."
                 required>
             </div>
+            <div class="field">
+              <label class="label">Institution</label>
+              <div class="control">
+                <input class="input" type="institucion" name="institucion" id="institucion" placeholder="Insert your institution.">
           </div>
           <div class="field">
             <label class="label">Password</label>
@@ -74,7 +78,7 @@
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
- <!-- Error message <script src="{% static 'js/generalFormValidators.js' %}"></script>--> 
+  <script src="{% static 'js/generalFormValidators.js' %}"></script>
   {% if form.errors %}
   <script>showError("Server error");</script>
   {% endif %}

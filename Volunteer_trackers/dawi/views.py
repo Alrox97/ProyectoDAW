@@ -40,3 +40,128 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'authen/signup.html', {'form': form})
+
+class IndexView(ListView):
+    """
+    Visualiza la lista de eventos :model:`authen.Events`.
+    **Context**
+    ``Events``
+        Una instancia de :model:`authen.Events`.
+    **Template:**
+    :template:`volunteers/myprofileVolun.html`
+    """
+    template_name = 'volunteers/myprofileVolun.html'
+    context_object_name = 'events_list'
+
+    def get_queryset(self):
+        return Events.objects.all()
+
+
+def create(request):
+    """
+    despliega un formulario para capturar los datos de un empleado.
+    **Template:**
+    :template:`volunteers/myprofileVolun.html`
+    """
+    if request.method == 'POST':
+        form = EventsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/myprofileVolun')
+    form = Events()
+    return redirect('/myprofileVolun')
+
+
+def update(request, id):
+    """
+    Despliega un formulario para actualizar los datos de un determinado empleado.
+    **Template:**
+    :template:`volunteers/myprofileVolun.html`
+    """
+    events = Events.objects.get(id=id)
+    form = EventsForm(request.POST, instance=events)
+    if form.is_valid():
+        form.save()
+        return redirect("/myprofileVolun")
+
+
+def delete(request, id):
+    """
+    Despliega un modal de confirmación para eliminar un empleado en concreto.
+    **Template:**
+    :template:`volunteers/myprofileVolun.html`
+    """
+    events = Events.objects.get(id=id)
+    events.delete()
+    return redirect("/myprofileVolun")
+
+
+def deletelist(request):
+    """
+    Despliega un modal de confirmación para eliminar varios eventos en concreto.
+    **Template:**
+    :template:`volunteers/myprofileVolun.html`
+    """
+    lista = dict(request.POST)
+    for element in lista['idCollection[]']:
+        events = Events.objects.get(id=element)
+        events.delete()
+
+class IndexView(ListView):
+   
+    template_name = 'institutions/myprofileInst.html'
+    context_object_name = 'events_list'
+
+    def get_queryset(self):
+        return Events.objects.all()
+
+
+def create(request):
+    """
+    despliega un formulario para capturar los datos de un empleado.
+    **Template:**
+    :template:`institutions/myprofileInst.html`
+    """
+    if request.method == 'POST':
+        form = EventsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/myprofileInst')
+    form = Events()
+    return redirect('/myprofileInst')
+
+
+def update(request, id):
+    """
+    Despliega un formulario para actualizar los datos de un determinado empleado.
+    **Template:**
+    :template:`institutions/myprofileInst.html`
+    """
+    events = Events.objects.get(id=id)
+    form = EventsForm(request.POST, instance=events)
+    if form.is_valid():
+        form.save()
+        return redirect("/myprofileInst")
+
+
+def delete(request, id):
+    """
+    Despliega un modal de confirmación para eliminar un empleado en concreto.
+    **Template:**
+    :template:`institutions/myprofileInst.html`
+    """
+    events = Events.objects.get(id=id)
+    events.delete()
+    return redirect("/myprofileInst")
+
+
+def deletelist(request):
+    """
+    Despliega un modal de confirmación para eliminar varios eventos en concreto.
+    **Template:**
+    :template:`institutions/myprofileInst.html`
+    """
+    lista = dict(request.POST)
+    for element in lista['idCollection[]']:
+        events = Events.objects.get(id=element)
+        events.delete()

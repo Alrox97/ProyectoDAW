@@ -8,6 +8,7 @@ class SignUpForm(UserCreationForm):
     Define la estructura de un formulario de login.
     """
     email = forms.CharField(max_length=400)
+    institucion = forms.CharField(max_length=400)
     class Meta:
         model = CustomUser
         fields = UserCreationForm.Meta.fields + ('email',)

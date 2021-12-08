@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% if user.is_authenticated %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,40 +6,415 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Israel Cruz Morales, Alejandro Cauich Ku" />
-    <title>Volunteer Trackers</title>
-
-    <script
-      src="https://kit.fontawesome.com/a2e2b9d23e.js"
-      crossorigin="anonymous"
-    ></script>
+    <title>Volunteer Trackers Institution Profile</title>
   </head>
 
-  <body>
-    <div class="container">
-      <!-- Error message 
-      <div id="error-message" class="notification is-danger is-hidden">
-        <button
-          class="delete close-error-message"
-          data-errmsg-id="#error-message"
-        ></button>
-        <span class="icon-text">
-          <span class="icon">
-            <i class="fas fa-exclamation-circle"></i>
-          </span>
-          <span id="error-message-description"></span>
-        </span>
+  <body class="has-background-white-ter">
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/mainHome">
+          <h1 class="pl-1">
+            <strong>Volunteer Trackers Institution Profile</strong>
+          </h1>
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
--->
-      <!-- View -->
-      <div class="columns">Hi this is my Institution profile</div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <button
+              class="button is-success open-modal"
+              data-modal-id="#add-option"
+            >
+              <span class="icon-text">
+                <span class="icon">
+                  <i class="fas fa-plus-circle"></i>
+                </span>
+                <span>Add a new event</span>
+              </span>
+            </button>
+          </div>
+          <div class="navbar-item">
+            <button
+              class="button is-danger open-modal"
+              data-modal-id="#remove-option"
+            >
+              <span class="icon-text">
+                <span class="icon">
+                  <i class="fas fa-minus-circle"></i>
+                </span>
+                <span>Remove selected event</span>
+              </span>
+            </button>
+          </div>
+          <div class="navbar-item">
+            <a href="/logout">
+              <button type="submit" class="button is-dark">
+                <span class="icon-text">
+                  <span class="icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                  <span>Log out</span>
+                </span>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navbar menus -->
+    <!-- Add menu -->
+    <div aria-hidden="" class="modal px-3" id="add-option">
+      <div
+        class="modal-background close-modal"
+        data-modal-id="#add-option"
+      ></div>
+      <div class="modal-card">
+        <!-- Add form -->
+        <form action="create/" method="post">
+          {% csrf_token %}
+          <section class="modal-card-head">
+            <p class="modal-card-title">Add a new event</p>
+            <button
+              aria-label="close"
+              class="delete close-modal"
+              data-modal-id="#add-option"
+            ></button>
+          </section>
+          <section class="modal-card-body">
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  name="name"
+                  placeholder="Insert the event's name."
+                  required
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Insert the Event's email."
+                  required
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Address</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  name="address"
+                  placeholder="Insert the Event's address."
+                  required
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Phone number</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  name="phone_num"
+                  placeholder="Insert the Event's phone number."
+                  required
+                />
+              </div>
+            </div>
+          </section>
+          <section class="modal-card-foot field is-grouped">
+            <div class="control">
+              <button type="submit" class="button is-success">
+                Save changes
+              </button>
+            </div>
+            <div class="control">
+              <button
+                class="button is-danger close-modal"
+                data-modal-id="#add-option"
+              >
+                Cancel
+              </button>
+            </div>
+          </section>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete menu -->
+    <div aria-hidden="" class="modal px-3" id="remove-option">
+      <div
+        class="modal-background close-modal"
+        data-modal-id="#remove-option"
+      ></div>
+      <div class="modal-card">
+        <!-- Delete form -->
+        <form action="deletelist/" method="post" id="post-selected">
+          {% csrf_token %}
+          <section class="modal-card-head">
+            <p class="modal-card-title">Remove selected Events</p>
+            <button
+              aria-label="close"
+              class="delete close-modal"
+              data-modal-id="#remove-option"
+            ></button>
+          </section>
+          <section class="modal-card-body">
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="check" required="" />
+                  I know that this action is permanent and I want to continue.
+                </label>
+              </div>
+            </div>
+          </section>
+          <section class="modal-card-foot field is-grouped">
+            <div class="control">
+              <button type="submit" class="button is-success">
+                Save changes
+              </button>
+            </div>
+            <div class="control">
+              <button
+                class="button is-danger close-modal"
+                data-modal-id="#remove-option"
+              >
+                Cancel
+              </button>
+            </div>
+          </section>
+        </form>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container mx-auto mt-4 mb-0 px-3 pb-3">
+      <div class="table-container">
+        <table id="check-table" class="table mt-3">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="check-master" /></th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Phone number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for events in events_list %}
+            <tr>
+              <!-- Table content -->
+              <td><input type="checkbox" class="checked-by-master" /></td>
+              <td class="e-id">{{events.id}}</td>
+              <td>{{events.name}}</td>
+              <td>{{events.email}}</td>
+              <td>{{events.address}}</td>
+              <td>{{events.phone_num}}</td>
+              <td>
+                <div class="icon-text">
+                  <div class="icon">
+                    <a
+                      class="has-text-warning open-modal"
+                      data-modal-id="#edit-option{{events.id}}"
+                      ><i class="far fa-edit"></i
+                    ></a>
+                  </div>
+                  <div class="icon">
+                    <a
+                      class="has-text-danger open-modal"
+                      data-modal-id="#remove-option{{events.id}}"
+                      ><i class="far fa-trash-alt"></i
+                    ></a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Edit panel -->
+            <div
+              aria-hidden=""
+              class="modal px-3"
+              id="edit-option{{events.id}}"
+            >
+              <div
+                class="modal-background close-modal"
+                data-modal-id="#edit-option{{events.id}}"
+              ></div>
+              <div class="modal-card">
+                <form action="update/{{events.id}}/" method="post">
+                  {% csrf_token %}
+                  <section class="modal-card-head">
+                    <p class="modal-card-title">Edit an events</p>
+                    <button
+                      aria-label="close"
+                      class="delete close-modal"
+                      data-modal-id="#edit-option{{events.id}}"
+                    ></button>
+                  </section>
+                  <section class="modal-card-body">
+                    <div class="field">
+                      <label class="label">Name</label>
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="text"
+                          name="name"
+                          placeholder="Insert the events's name."
+                          required
+                          value="{{events.name}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label">Email</label>
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="email"
+                          name="email"
+                          id="email"
+                          placeholder="Insert the events's email."
+                          required
+                          value="{{events.email}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label">Address</label>
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="text"
+                          name="address"
+                          placeholder="Insert the events's address."
+                          required
+                          value="{{events.address}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label">Phone number</label>
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="text"
+                          name="phone_num"
+                          placeholder="Insert the events's phone number."
+                          required
+                          value="{{events.phone_num}}"
+                        />
+                      </div>
+                    </div>
+                  </section>
+                  <section class="modal-card-foot field is-grouped">
+                    <div class="control">
+                      <button type="submit" class="button is-success">
+                        Save changes
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button
+                        class="button is-danger close-modal"
+                        data-modal-id="#edit-option{{events.id}}"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </section>
+                </form>
+              </div>
+            </div>
+
+            <!-- Delete panel -->
+            <div
+              aria-hidden=""
+              class="modal px-3"
+              id="remove-option{{events.id}}"
+            >
+              <div
+                class="modal-background close-modal"
+                data-modal-id="#remove-option{{events.id}}"
+              ></div>
+              <div class="modal-card">
+                <form action="delete/{{events.id}}/" method="post">
+                  {% csrf_token %}
+                  <section class="modal-card-head">
+                    <p class="modal-card-title">Remove an events</p>
+                    <button
+                      aria-label="close"
+                      class="delete close-modal"
+                      data-modal-id="#remove-option{{events.id}}"
+                    ></button>
+                  </section>
+                  <section class="modal-card-body">
+                    <div class="field">
+                      <div class="control">
+                        <label class="checkbox">
+                          <input type="checkbox" name="check" required="" />
+                          I know that this action is permanent and I want to
+                          continue.
+                        </label>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="modal-card-foot field is-grouped">
+                    <div class="control">
+                      <button type="submit" class="button is-success">
+                        Save changes
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button
+                        class="button is-danger close-modal"
+                        data-modal-id="#remove-option{{events.id}}"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </section>
+                </form>
+              </div>
+            </div>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- View  <script src="{% static 'js/generalFormValidators.js' %}"></script> -->
-    {% if form.errors %}
-    <script>
-      showError("Username or password incorrect.");
-    </script>
-    {% endif %}
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script src="{% static 'js/checkmaster.js' %}"></script>
   </body>
 </html>
+{% else %}
+<meta http-equiv="REFRESH" content="0;URL=../login" />
+{% endif %}

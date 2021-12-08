@@ -7,10 +7,11 @@ class CustomUser(AbstractUser):
     Describe datos adicionales para guardar usuarios.
     """
     email = models.CharField(max_length=300, blank=False)
+    institucion = models.CharField(max_length=300, blank=False)
 
 class Events(models.Model):
     """
-    Describe los datos de un empleado.
+    Describe los datos de un Evento.
     """
     name = models.CharField(max_length=100, default='DEFAULT VALUE')
     email = models.CharField(max_length=100, default='DEFAULT VALUE')
